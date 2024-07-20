@@ -1,7 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import AxiosClient from "../../axios/api";
-import { GET_CSRF_TOKEN_URL } from "../../URLS/URLS.JSX";
-import { LOGIN_URL } from "../../URLS/URLS.JSX";
 import { userApi } from "../../services/userApi";
 
 const UserContext = createContext({
@@ -18,8 +15,8 @@ const UserContext_ = ({ children }) => {
     const [user, setUser] = useState({});
     const [isAuth, setIsAuth] = useState(JSON.parse(window.localStorage.getItem('ACCESS_TOKEN')) || false);
 
-    const login = async (email, password) => {
-        return await userApi.login(email, password);
+    const login = async (values) => {
+        return await userApi.login(values);
     }
 
     const register = async (name, username, email, password, password_confirmation) => {

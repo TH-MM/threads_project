@@ -18,7 +18,7 @@ const UserLayout = () => {
             })
 
         if (!context.isAuth) {
-            navigator(FRONT_LOGIN_URL)
+            navigator(FRONT_LOGIN_URL , { replace: true })
         }
     } , [])
 

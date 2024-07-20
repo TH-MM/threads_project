@@ -6,9 +6,9 @@ import { LOGOUT_URL } from "../URLS/URLS.JSX";
 import { REGISTER_URL } from "../URLS/URLS.JSX";
 
 export const userApi = {
-    login: async (email, password) => {
+    login: async (values) => {
         await AxiosClient.get(GET_CSRF_TOKEN_URL);
-        return await AxiosClient.post(LOGIN_URL, { email, password })
+        return await AxiosClient.post(LOGIN_URL, values)
     },
     logout: async () => {
         await AxiosClient.get(GET_CSRF_TOKEN_URL);

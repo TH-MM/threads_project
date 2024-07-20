@@ -7,3 +7,5 @@ export const HOME_URL = "/"
 export const GET_CSRF_TOKEN_URL = "/sanctum/csrf-cookie"
 export const FRONT_LOGIN_URL = "/auth/login"
 export const FRONT_REGISTER_URL = "/auth/register"
+export const GET_POSTS = "/api/posts"
+export const UPDATE_POST = `/api/posts`

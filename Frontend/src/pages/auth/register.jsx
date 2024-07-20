@@ -6,24 +6,25 @@ import { Form, Formik } from "formik";
 import FieldBox from "../../Components/FormComponents/fieldBox";
 import Button from "../../Components/Ui/button";
 import * as Yup from 'yup';
-import Logo from "../../Components/Navbar/logo";
 import Link_ from "../../Components/Ui/links";
 import { Link, useNavigate } from "react-router-dom";
-import { LoaderCircleIcon } from "lucide-react";
+import { LoaderCircleIcon} from "lucide-react";
 import { useUserContext } from "../../context/userContext/userContext";
 import { FRONT_LOGIN_URL } from "../../URLS/URLS.JSX";
+import { Logo } from "../../svg/icons";
 
 
 const Register = () => {
     const context = useUserContext();
     const navigator = useNavigate()
 
-    // const validationSchema = Yup.object().shape({
-    //     name: Yup.string().required(),
-    //     username: Yup.string().required(),
-    //     email: Yup.string().email().required(),
-    //     password: Yup.string().required().min(8),
-    // });
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().required(),
+        username: Yup.string().required(),
+        email: Yup.string().email().required(),
+        password: Yup.string().required().min(8),
+        password_confirmation: Yup.string().required().min(8),
+    });
 
     const registerSubmition = async (values, { setSubmitting, setErrors }) => {
         await context.register(values.name, values.username, values.email, values.password, values.password_confirmation).then((response) => {
@@ -45,12 +46,13 @@ const Register = () => {
     return (
         <div className="h-200 flex items-center">
             <Formik
+            validationSchema={validationSchema}
                 initialValues={{ name: "", username: "", email: "", password: "", password_confirmation: "" }}
                 onSubmit={registerSubmition}
             >
                 {({ errors, isSubmitting }) => (
                     <Form className="p-fp rounded-xl flex flex-col items-center w-fw mx-auto border border-solid border-spacing-1">
-                        <Link to={"/"}><Logo className="text-center mb-12" /></Link>
+                        <Link to={"/"}><Logo size={38} className="text-center mb-12 fill-gray-800 stroke-none" /></Link>
                         <div className="relative w-full">
                             <FieldBox type="text" name="name" placeholder="Name">Name</FieldBox>
                             {errors.name && <div className="text-red-500 absolute bottom-1 left-1 text-sm">{errors.name}</div>}
@@ -71,10 +73,10 @@ const Register = () => {
                             <FieldBox type="password" name="password_confirmation" placeholder="password_confirmation">Password Confirmation</FieldBox>
                             {errors.password_confirmation && <div className="text-red-500 absolute bottom-1 left-1 text-sm">{errors.password_confirmation}</div>}
                         </div>
-                        <Button disabled={isSubmitting} className={`w-full ${isSubmitting ? "bg-red-300 " : ''} bg-red-500 ${isSubmitting ? "" : 'hover:bg-red-600'} mt-2`}>
-                            {isSubmitting ? (<LoaderCircleIcon className="inline mr-2 animate-spin" />) : "Login"}
+                        <Button disabled={isSubmitting} className={`w-full text-white ${isSubmitting ? "bg-gray-500 " : 'bg-gray-900 hover:bg-black'} mt-2`}>
+                            {isSubmitting ? (<LoaderCircleIcon className="inline mr-2 animate-spin" />) : "Register"}
                         </Button>
-                        <p className="text-sm mt-3">Don't have an account? <Link_ to={FRONT_LOGIN_URL} className="text-red-400">login</Link_></p>
+                        <p className="text-sm mt-3">Don't have an account? <Link_ to={FRONT_LOGIN_URL} className="text-gray-900">login</Link_></p>
                     </Form>
                 )}
             </Formik>

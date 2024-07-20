@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layouts/layout";
-import Test from "../pages/test";
 import Login from "../pages/auth/login";
 import AuthLayout from "../Layouts/auth/authLayout";
-import UserDashboard from "../pages/user/dashboard";
 import UserLayout from "../Layouts/userLayout/userLayout";
 import Register from "../pages/auth/register";
+import CreatPostForm from "../pages/posts/create";
+import UserProfile from "../pages/user/profile";
+import Home from "../pages/home";
+import EditPostForm from "../pages/posts/edit";
 
 const Routes = createBrowserRouter([
     {
@@ -14,8 +16,16 @@ const Routes = createBrowserRouter([
         children:[
             {
                 path:"/",
-                element:<Test />
-            }
+                element:<Home />
+            },
+            {
+                path:"/post/create",
+                element:<CreatPostForm />
+            },
+            {
+                path:"/post/edit/:id",
+                element:<EditPostForm />
+            },
         ]
     },
     {
@@ -38,7 +48,7 @@ const Routes = createBrowserRouter([
         children:[
             {
                 path:"/user/dashboard",
-                element:<UserDashboard />
+                element:<UserProfile />
             }
         ]
     }

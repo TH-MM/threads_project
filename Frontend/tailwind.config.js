@@ -10,6 +10,7 @@ export default {
         '200': '90vh',
         'fw' : '460px',
         'fp' : '30px',
+        "profile" :"700px"
       }
     },
   },
