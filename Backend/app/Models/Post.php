@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Like;
+
 
 class Post extends Model
 {
@@ -23,5 +26,15 @@ class Post extends Model
         public function user(): BelongsTo
         {
             return $this->belongsTo(User::class);
+        }
+
+        /**
+         * Get all of the comments for the Post
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\HasMany
+         */
+        public function likes(): HasMany
+        {
+            return $this->hasMany(Like::class);
         }
 }

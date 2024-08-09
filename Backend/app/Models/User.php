@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Post;
+use App\Models\Like;
+
 
 class User extends Authenticatable
 {
@@ -57,4 +59,11 @@ class User extends Authenticatable
         {
             return $this->hasMany(Post::class);
         }
+
+        public function likes(): HasMany
+        {
+            return $this->hasMany(Like::class);
+        }
+
+
 }

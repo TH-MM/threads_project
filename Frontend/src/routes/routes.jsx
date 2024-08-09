@@ -8,6 +8,8 @@ import CreatPostForm from "../pages/posts/create";
 import UserProfile from "../pages/user/profile";
 import Home from "../pages/home";
 import EditPostForm from "../pages/posts/edit";
+import EditProfle from "../pages/user/edit";
+import UsersProfile from "../pages/usersProfile";
 
 const Routes = createBrowserRouter([
     {
@@ -25,6 +27,10 @@ const Routes = createBrowserRouter([
             {
                 path:"/post/edit/:id",
                 element:<EditPostForm />
+            },
+            {
+                path:"/user/:username",
+                element:<UsersProfile />
             },
         ]
     },
@@ -47,9 +53,14 @@ const Routes = createBrowserRouter([
         element:<UserLayout />,
         children:[
             {
-                path:"/user/dashboard",
+                path:"/user/profile",
                 element:<UserProfile />
+            },
+            {
+                path:"/user/profile/edit",
+                element:<EditProfle />
             }
+            
         ]
     }
 ])

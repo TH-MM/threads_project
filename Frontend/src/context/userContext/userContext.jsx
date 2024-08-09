@@ -4,41 +4,58 @@ import { userApi } from "../../services/userApi";
 const UserContext = createContext({
     user: {},
     isAuth: false,
+    shouldRefresh: false,
     setUser: () => { },
     setIsAuthenticated: () => { },
     login: () => { },
     register: () => { },
     logout: () => { },
-})
+    update: () => { },
+    refresh_: () => { },
+    setShoulsRefresh: () => { },
+});
 
-const UserContext_ = ({ children }) => {
+const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
     const [isAuth, setIsAuth] = useState(JSON.parse(window.localStorage.getItem('ACCESS_TOKEN')) || false);
+    const [shouldRefresh , setShoulsRefresh] = useState(false);
 
     const login = async (values) => {
         return await userApi.login(values);
-    }
+    };
+
+    const update = async (values) => {
+        const response = await userApi.update(values);
+        return response;
+    };
 
     const register = async (name, username, email, password, password_confirmation) => {
         return await userApi.register(name, username, email, password, password_confirmation);
-    }
+    };
 
     const logout = async () => {
-        return await userApi.logout();
-    }
+        await userApi.logout();
+        setIsAuth(false);
+        setUser({});
+        window.localStorage.removeItem("ACCESS_TOKEN");
+    };
 
     const setIsAuth_ = (isAuth) => {
         setIsAuth(isAuth);
-        window.localStorage.setItem("ACCESS_TOKEN", JSON.stringify(isAuth))
+        window.localStorage.setItem("ACCESS_TOKEN", JSON.stringify(isAuth));
+    };
+
+    const refresh_= () => {
+        setShoulsRefresh(true)
     }
 
     return (
-        <UserContext.Provider value={{ user, isAuth, setIsAuth_, login, register, logout ,setUser}}>
+        <UserContext.Provider value={{ user, isAuth, setIsAuth_, login, register, logout, setUser, update , refresh_ , shouldRefresh , setShoulsRefresh}}>
             {children}
         </UserContext.Provider>
-    )
-}
+    );
+};
 
-export default UserContext_;
+export default UserContextProvider;
 
-export const useUserContext = () => { return useContext(UserContext) };
+export const useUserContext = () => useContext(UserContext);

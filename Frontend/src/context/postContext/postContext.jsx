@@ -6,6 +6,7 @@ const PostContext = createContext({
     setPosts: () => { },
     getPosts: () => { },
     updatePost: () => { },
+    likePost: () => { },
 })
 
 const PostContext_ = ({ children }) => {
@@ -19,8 +20,12 @@ const PostContext_ = ({ children }) => {
         return await postApi.update(values , id);
     };
 
+    const likePost = async (postId)=>{
+        return await postApi.like(postId);
+    }
+
     return (
-        <PostContext.Provider value={{ posts,setPosts , getPosts ,updatePost}}>
+        <PostContext.Provider value={{ posts,setPosts , getPosts ,updatePost , likePost}}>
             {children}
         </PostContext.Provider>
     )

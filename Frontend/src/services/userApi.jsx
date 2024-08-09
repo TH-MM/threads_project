@@ -4,6 +4,7 @@ import AxiosClient from "../axios/api";
 import { USER_DATA_URL } from "../URLS/URLS.JSX";
 import { LOGOUT_URL } from "../URLS/URLS.JSX";
 import { REGISTER_URL } from "../URLS/URLS.JSX";
+import { USER_Edit_URL } from "../URLS/URLS.JSX";
 
 export const userApi = {
     login: async (values) => {
@@ -21,5 +22,12 @@ export const userApi = {
     getUser: async () => {
         await AxiosClient.get(GET_CSRF_TOKEN_URL);
         return await AxiosClient.get(USER_DATA_URL)
+    },
+    update: async (values) => {
+        return await AxiosClient.post(USER_Edit_URL, values , {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
     }
 }

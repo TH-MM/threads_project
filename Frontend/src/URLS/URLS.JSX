@@ -1,4 +1,5 @@
-export const USER_DASHBOARD_URL = "/user/dashboard"
+export const USER_DASHBOARD_URL = "/user/profile"
+export const USER_Edit_URL = "/api/user/profile/edit"
 export const LOGIN_URL = "/login"
 export const LOGOUT_URL = "/logout"
 export const USER_DATA_URL = "/api/user"
@@ -9,3 +10,5 @@ export const FRONT_LOGIN_URL = "/auth/login"
 export const FRONT_REGISTER_URL = "/auth/register"
 export const GET_POSTS = "/api/posts"
 export const UPDATE_POST = `/api/posts`
+export const LIKE_POST = `/api/post/like`
+export const LIKES = `/api/likes`
